@@ -29,5 +29,20 @@ pipeline {
                 mail bcc: '', body: 'Sample Body', cc: '', from: '', replyTo: '', subject: 'Sample Subject', to: 'kalraishaan16@gmail.com'
             }
         }
+        stage('Cleaning Stage') {
+            steps {
+                parallel(
+                    a: {
+                        bat "mvn clean"
+                    },
+                    b: {
+                        bat "mvn test"
+                    },
+                    c: {
+                        bat "mvn package"
+                    }
+                )   
+            }
+        }
     }
 }
